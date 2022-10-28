@@ -16,8 +16,8 @@ app.use(bodyParser.json());
  */
 app.post('/login', (req: Request, res: Response) => {
   const { username, password } = req.body;
-  if (!username && !password) {
-    throw new Error('Username & Password is required for login');
+  if (!username || !password) {
+    throw new Error('Both Username & Password are required for login');
   }
   return res.json(userService.login(req.body));
 });

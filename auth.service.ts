@@ -11,15 +11,13 @@ class AuthService {
      const access_token = sign(
        { user, sub: user.email }, 
        String(process.env.JWT_SECRET), 
-       { expiresIn: process.env.JWT_REFRESH_EXPIRATION }, // refresh_token expires in 60 days          
+       { expiresIn: process.env.JWT_EXPIRATION }, // refresh_token expires in 15 min          
      );
-     console.log('access_token', access_token)
      const refresh_token = sign(
        { user, sub: user.email }, 
        String(process.env.JWT_REFRESH_SECRET), 
        { expiresIn: process.env.JWT_REFRESH_EXPIRATION }, // refresh_token expires in 60 days          
      );
-     console.log('refresh_token', refresh_token)
      return {
        access_token,
        expires_in: Number(process.env.JWT_EXPIRATION), // access_token expires in 15 min
